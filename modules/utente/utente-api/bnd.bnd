@@ -1,0 +1,10 @@
+Bundle-Name: utente-api
+Bundle-SymbolicName: utente.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	utente.exception,\
+	utente.model,\
+	utente.service,\
+	utente.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../utente-service/service.xml
