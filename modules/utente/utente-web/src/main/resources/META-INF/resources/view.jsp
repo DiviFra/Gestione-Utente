@@ -29,38 +29,9 @@
     <liferay-portlet:param name="mvcRenderCommandName" value="/modify_entity" />
 </portlet:renderURL>
 
-<liferay-portlet:actionURL name="/delete_entity" var="delteDetailsURL" />
-
-<liferay-portlet:actionURL name="/delete_utente" var="delteDetailsURL" />
-
-
-
-
 <portlet:renderURL var="deleteURL">
     <liferay-portlet:param name="mvcRenderCommandName" value="/delete_entity" />
 </portlet:renderURL>
-
-<!-- model -->
-<script >
-function deleteUser(userId) {
-    if (confirm('Are you sure you want to delete this user?' + userId)) {
-        AUI().use('aui-io-request', function(A) {
-            A.io.request('<%= deleteURL.toString()%>', {
-                method: 'POST',
-                data: {
-                    userId: userId
-                },
-                on: {
-                    success: function() {
-                    	location.reload();
-                    }
-                }
-            });
-        });
-    }
-}
-</script>
-
 
 <p>
 	<b><liferay-ui:message key="utenteweb.caption"/></b>
@@ -96,77 +67,8 @@ function deleteUser(userId) {
         <liferay-ui:search-container-column-text name="name" />
         <liferay-ui:search-container-column-text name="secondName" />
         <liferay-ui:search-container-column-text name="codiceFiscale" />
-			<liferay-ui:search-container-column-text name="Delete">
-				<a href="javascript:;"
-					onclick="deleteUser('<%=utente.getUtenteId()%>')"
-					class="btn btn-danger">Delete</a>
-			</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row> 
     
     <liferay-ui:search-iterator markupView="lexicon" paginate="false" />
 </liferay-ui:search-container>
-
-<liferay-ui:search-container emptyResultsMessage="no-entries-were-found">
-    <liferay-ui:search-container-results
-            results="<%= utentes %>"
-    />
-
-<liferay-ui:search-container-row 
-	className="utente.model.Utente"
-	escapedModel="<%= true %>"
-	keyProperty="utenteId" 
-	modelVar="utente">
-	<liferay-ui:search-container-column-text name="utenteId" />
-	<liferay-ui:search-container-column-text name="name" />
-	<liferay-ui:search-container-column-text name="secondName" />
-	<liferay-ui:search-container-column-text name="codiceFiscale" />
-	<liferay-ui:search-container-column-text align="right">
-		<%
-			String utenteId = String.valueOf(utente.getUtenteId());
-		%>
-		<a href="javascript:;" class="btn btn-primary" onclick="alert('<%= utenteId %>')">Get Utente ID</a>
-	</liferay-ui:search-container-column-text>
-
-<liferay-ui:search-container-column-text align="right">
-		<%
-			String utenteId = String.valueOf(utente.getUtenteId());
-		%>
-		<a href="<%= deleteURL.toString()%>" class="btn btn-primary" onclick="deleteUser('<%= utenteId %>')">Delete ID</a>
-	</liferay-ui:search-container-column-text>
-	
-</liferay-ui:search-container-row>
-
-   <liferay-ui:search-iterator markupView="lexicon" paginate="false" />
-</liferay-ui:search-container>
-
-<portlet:defineObjects />
-
-<portlet:actionURL var="addUtenteURL">
-    <portlet:param name="mvcActionCommand" value="/utente/addUtente" />
-</portlet:actionURL>
-
-<portlet:actionURL var="deleteUtenteURL">
-    <portlet:param name="mvcActionCommand" value="/utente/deleteUtente" />
-</portlet:actionURL>
-
-<portlet:renderURL var="viewURL"></portlet:renderURL>
-
-<div>
-    <h1>Utente Management</h1>
-
-    <h2>Add Utente</h2>
-    <form method="post" action="<%= addUtenteURL %>" >
-        Utente ID: <input type="text" name="utenteId" required /><br>
-        Nome: <input type="text" name="nome" required /><br>
-        Cognome: <input type="text" name="cognome" required /><br>
-        <aui:button type="submit" value="Add Utente" />
-    </form>
-
-    <h2>Delete Utente</h2>
-    <form method="post" action="<%= deleteUtenteURL %>">
-        Utente ID: <input type="text" name="utenteId" required /><br>
-        <aui:button type="submit" value="Delete Utente" />
-    </form>
-</div>
-
 

@@ -1,6 +1,6 @@
 <%@ include file="init.jsp" %>
 
-<liferay-portlet:actionURL name="/modify_animal" var="addDetailsURL" />
+<liferay-portlet:actionURL name="/modify_utente" var="addDetailsURL" />
 
 <aui:form action="<%= addDetailsURL.toString() %>" method="post" >
     <aui:input type="hidden" name="CMD" value="ADD" />
@@ -13,4 +13,3 @@
         
     <aui:button type="submit" />
 </aui:form>
-

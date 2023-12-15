@@ -22,7 +22,7 @@ import utente.web.constants.UtenteWebPortletKeys;
 		immediate = true,
 		property = {
 			"javax.portlet.name=" + UtenteWebPortletKeys.UTENTEWEB,
-		    "mvc.command.name=/modify_entity"
+		    "mvc.command.name=/modify_utente"
 	},
 	service = MVCActionCommand.class
 )
@@ -34,6 +34,9 @@ public class ActionCommandModifyUtente extends BaseMVCActionCommand {
 	protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 		// TODO Auto-generated method stub
 		
+		
+			System.out.println("Modify user =>  \n");
+
 			
 			ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -50,6 +53,8 @@ public class ActionCommandModifyUtente extends BaseMVCActionCommand {
 			 _utenteLocalService.updateUtente(themeDisplay.getUserId(),
 						utenteId, themeDisplay.getScopeGroupId(), name, secondName, codiceFiscale,
 						ServiceContextFactory.getInstance(actionRequest));
+			 
+			 System.out.println(" \n END Modify user =>  \n");
 		}
 		
 		@Reference

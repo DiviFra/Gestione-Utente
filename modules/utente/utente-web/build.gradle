@@ -1,6 +1,8 @@
 dependencies {
 
 	compile project(":modules:utente:utente-api")
+	compile project(":modules:utente:utente-service")
+	
 
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
 

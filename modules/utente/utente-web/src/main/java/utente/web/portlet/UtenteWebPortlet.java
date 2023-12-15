@@ -3,9 +3,7 @@ package utente.web.portlet;
 import utente.web.constants.UtenteWebPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-
 import javax.portlet.Portlet;
-
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -15,7 +13,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"com.liferay.portlet.display-category=category.sample",
-		"com.liferay.portlet.header-portlet-css=/css/style.css",
+		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=UtenteWeb",
 		"javax.portlet.init-param.template-path=/",
@@ -27,5 +25,6 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class UtenteWebPortlet extends MVCPortlet {
+		
 	
 }

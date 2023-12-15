@@ -1,3 +1,4 @@
+<%@page import="utente.model.Utente"%>
 <%@ include file="init.jsp" %>
 
 <liferay-portlet:actionURL name="/add_utente" var="addDetailsURL" />
@@ -9,7 +10,10 @@
     <aui:input type="text" name="secondName" value="" required="<%= true %>" />
     <aui:input type="text" name="codiceFiscale" value="" required="<%= true %>" />
     
-    <aui:button type="submit" />    
+    <aui:button type="submit" />     
     
- </aui:form>
+ 
+</aui:form>
+ 
+    
     

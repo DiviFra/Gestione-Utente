@@ -28,8 +28,7 @@ import com.liferay.portal.kernel.service.permission.ModelPermissions;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.osgi.service.component.annotations.Component;
 
@@ -133,10 +132,8 @@ public class UtenteLocalServiceImpl extends UtenteLocalServiceBaseImpl {
 		
 		validate(name,secondName,codiceFiscale);
 		
-		ModelPermissions modelPermissions=serviceContext.getModelPermissions();
-		resourceLocalService.updateResources(entry.getCompanyId(),entry.getGroupId(),entry.getName(),
-				entry.getPrimaryKey(), modelPermissions	);
-		
+		entry = utentePersistence.update(entry);
+				
 		return entry;
 	}
 	
