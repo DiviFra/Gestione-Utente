@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  liferay:
+    image: liferay/dxp:7.4.13-u56
+    environment:
+      - LIFERAY_JPDA_ENABLED=true
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_DRIVER_UPPERCASEC_LASS_UPPERCASEN_AME=org.postgresql.Driver
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_URL=jdbc:postgresql://postgres:5432/lportal
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_USERNAME=liferay
+      - LIFERAY_JDBC_PERIOD_DEFAULT_PERIOD_PASSWORD=my-secret-pw
+      - LIFERAY_MAIL_PERIOD_SESSION_PERIOD_MAIL_PERIOD_SMTP_PERIOD_HOST=mail
+      - LIFERAY_SETUP_PERIOD_WIZARD_PERIOD_ENABLED=false
+      - LIFERAY_WORKSPACE_ENVIRONMENT=local
+      - LIFERAY_ENTERPRISE_PERIOD_PRODUCT_PERIOD_ENTEPRISE_PERIOD_SEARCH_PERIOD_ENABLED=false
+    ports:
+      - '8080:8080'
+      - '8000:8000'
+      - '9201:9201'
+      - '11311:11311'
+    volumes:
+      - ./configs/docker/scripts:/mnt/liferay/scripts
+      - ./configs/docker/osgi/configs:/opt/liferay/osgi/configs
+      - ./configs/docker/osgi/log4j:/opt/liferay/osgi/log4j
+      - ./configs/docker/liferay-home:/mnt/liferay/files
+      - ./bundles/osgi/marketplace/override:/opt/liferay/osgi/marketplace/override
+      - ./bundles/osgi/modules:/opt/liferay/osgi/modules
+      - ./bundles/osgi/war:/opt/liferay/osgi/war
+      - ./bundles/deploy:/opt/liferay/deploy
+      - ./bundles/data:/opt/liferay/data
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12.8
+    environment:
+      - POSTGRES_PASSWORD=my-secret-pw
+      - POSTGRES_USER=liferay
+      - POSTGRES_DB=lportal
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 25432:5432
+    volumes:
+      - ./bundles/postgres/data:/var/lib/postgresql/data
+  mail:
+    image: miladrahimi/fake-smtp
+    restart: always
+    working_dir: /output/
+    volumes:
+      - ./bundles/mail/:/output/
+    ports:
+      - 25
